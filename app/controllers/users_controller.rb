@@ -7,5 +7,21 @@ class UsersController < ApplicationController
     @user = User.new
   end
   
+  def create
+    @user = User.new(user_params)
+    if @user.save # 保存に成功した場合
+      flash[:success] = '新規作成に成功しました。'
+      redirect_to @user
+    else
+      render :new
+    end
+  end
   
+  private
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    
 end
