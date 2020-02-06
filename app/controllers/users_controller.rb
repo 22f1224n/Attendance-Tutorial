@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_uder, only: [:show, :edit, :update]
-  before_action :logged_in_uder, only: [:show, :edit, :update]
-  before_action :correct_uder, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :correct_user, only: [:edit, :update]
     
   def show
     @user = User.find(params[:id])
@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   end
   
   def edit
+    @user = User.find(params[:id])
   end
   
   def update
@@ -46,7 +47,8 @@ class UsersController < ApplicationController
 
     def logged_in_user
       unless logged_in?
-        falsh[:danger] = "ログインしてください。"
+        store_location
+        flash[:danger] = "ログインしてください。"
         redirect_to login_url
       end
     end
