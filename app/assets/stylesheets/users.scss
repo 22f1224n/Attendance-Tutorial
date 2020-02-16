@@ -1,12 +1,24 @@
 /* ユーザー情報テーブル */
-
 .user-table {
   vertical-align: middle;
   text-align: center;
 }
 
-/* 入力フォーム */
 
+/* ユーザー勤怠情報テーブル*/
+#table-attendances {
+  th {
+    vertical-align: middle;
+    text-align: cebter;
+  }
+  td {
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
+
+/* 入力フォーム */
 .label-signup {
   margin-top: 5px;
 }
@@ -23,10 +35,19 @@
   margin-top: 10px;
 }
 
-/* ユーザー一覧ページ */
 
+/* ユーザー一覧ページ */
 #table-users {
   td {
     vertical-align: middle;
   }  
+}
+
+.label-basic-info {
+  margin-top: 5px;
+}
+
+.btn-basic-info {
+  margin: 15px 0;
+  width: 30%;
 }
