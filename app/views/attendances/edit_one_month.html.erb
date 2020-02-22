@@ -1,4 +1,4 @@
-<% provade(:title, @user.name) %>
+<% provide(:title, @user.name) %>
 <div>
   <H1>勤怠編集画面</H1>
   <table class="table table-border table-condensed table-hover" id="table-attendances"</table>
@@ -17,7 +17,7 @@
       <% @attendances.each do |day| %>
         <tr>
           <td><%= l(day.worked_on, format: :short) %></td>
-          <td><%= $days_of_the_week[day.worked_on_wday]</td>
+          <td><%= $days_of_the_week[day.worked_on.wday] %></td>
           <td></td>
           <td></td>
           <td></td>
@@ -25,4 +25,8 @@
       <% end %>
     </tbody>
   </table>
+</div>
+
+<div class="center">
+  <%= link_to "キャンセル", user_path(date: @first_day), class: "btn btn-lg btn-default" %>
 </div>
