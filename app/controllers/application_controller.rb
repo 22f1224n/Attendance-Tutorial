@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   $days_of_the_week = %w{日 月 火 水 木 金 土}
   
-    # beforフィルター
+  # beforフィルター
 
   # paramsハッシュからユーザーを取得します。
   def set_user
@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
         # 繰り返し処理により、1ヶ月分の勤怠データを生成します。
         one_month.each { |day| @user.attendances.create!(worked_on: day) }
       end
-    @attendances = @user.attendances.where(worked_on: @first_day..@last_day).order(:worked_pn)
+      @attendances = @user.attendances.where(worked_on: @first_day..@last_day).order(:worked_pn)
     end
 
   rescue ActiveRecord::RecordInvalid # トランザクションによるエラーの分岐です。
