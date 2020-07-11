@@ -8,3 +8,4 @@
 * Ruby
 * Rails
 * Git(HTTPSからSSH通信へ変更)
+* 勤怠Bスタート　7/11　スタート
