@@ -1,11 +1,13 @@
 # coding: utf-8
 
+# 管理者権限
 User.create!(name: "Sample User",
              email: "sample@email.com",
              password: "password",
              password_confirmation: "password",
              admin: true)
 
+# ランダムにユーザーを生成
 60.times do |n|
   name  = Faker::Name.name
   email = "sample-#{n+1}@email.com"
