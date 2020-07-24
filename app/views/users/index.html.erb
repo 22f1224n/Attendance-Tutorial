@@ -5,7 +5,7 @@
     <p>ユーザー名検索</p>
       <%= form_tag(users_path,:method => 'get') do %>
       <%= text_field_tag :search, placeholder = "キーワードを入力" %>
-      <%= submit_tag 'Search', :name => nil %>
+      <%= submit_tag '検索', :name => nil %>
     <% end %>
 </div>
 <div class="col-md-10 col-md-offset-1">
