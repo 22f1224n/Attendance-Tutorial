@@ -31,13 +31,18 @@ class AttendancesController < ApplicationController
   
   def update_one_month
     ActiveRecord::Base.transaction do # トランザクションを開始します。
-      attendances_params.each do |id, item|
-        attendance = Attendance.find(id)
-        attendance.update_attributes!(item)
+      if attendances_invalid?
+        attendances_params.each do |id, item|
+          attendance = Attendance.find(id)
+          attendance.update_attributes!(item)
+        end
+        flash[:success] = "1ヶ月分の勤怠情報を更新しました。"
+        redirect_to user_url(date: params[:date])
+      else
+        flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"
+        redirect_to attendances_edit_one_month_user_url(date: params[:date])
       end
-    end
-    flash[:success] = "1ヶ月分の勤怠情報を更新しました。"
-    redirect_to user_url(date: params[:date])
+  end
   rescue ActiveRecord::RecordInvalid # トランザクションによるエラーの分岐です。
     flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"
     redirect_to attendances_edit_one_month_user_url(date: params[:date])
@@ -47,6 +52,22 @@ class AttendancesController < ApplicationController
   
     def attendances_params
       params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
+    end
+    
+    def attendances_invalid?
+     attendances = true
+      attendances_params.each do |id, item|
+        if item[:started_at].blank? && item[:finished_at].blank?
+          next
+        elsif item[:started_at].blank? || item[:finished_at].blank?
+          attendances = false
+          break
+        elsif item[:started_at] > item[:finished_at]
+          attendances = false
+          break
+        end
+     end
+     return attendances
     end
     
     def admin_or_correct_user
