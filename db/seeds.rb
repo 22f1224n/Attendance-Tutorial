@@ -7,6 +7,12 @@ User.create!(name: "Sample User",
              password_confirmation: "password",
              admin: true)
 
+# 一般ユーザー
+User.create!(name: "Sample User1",
+             email: "sample1@email.com",
+             password: "password",
+             password_confirmation: "password")
+
 # ランダムにユーザーを生成
 60.times do |n|
   name  = Faker::Name.name
